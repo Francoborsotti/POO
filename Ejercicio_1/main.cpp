@@ -36,9 +36,15 @@ int main(){
     }
 
     //ordenamiento
-    std::sort(Postes.begin(), Postes.end(), [](const Poste& a, const Poste& b) {
-        return a.getAltura() < b.getAltura();
-    });
+    for (int i = 0; i < 5; i++) {
+        for (int j = 0; j < 4; j++) {
+            if (Postes[j].getAltura() > Postes[j + 1].getAltura()) {
+                // Intercambiar arr[j] y arr[j + 1]
+                swap(Postes[j], Postes[j + 1]);
+            }
+        }
+    }
+
 
     //muestra
     cout <<"ordenado" << endl;
