@@ -1,7 +1,15 @@
 #include <iostream>
 #include <vector>
+#include <windows.h>
+#include <psapi.h>
 
 using namespace std;
+
+SIZE_T getCurrentMemoryUsage() {
+    PROCESS_MEMORY_COUNTERS_EX pmc;
+    GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
+    return pmc.PrivateUsage;
+}
 
 class Auto{
 private:
@@ -20,23 +28,23 @@ public:
 };
 
 int main(){
-    bool aux = true;
-    while(aux){
+    vector<Auto>autos;
+
+    while(true){
         int kilometro;
         string marca;
+        SIZE_T memoryUsage = getCurrentMemoryUsage();
+
+        if ((memoryUsage/ (1024 * 1024)) > 200){
+            break;
+        }
+
         cout << "introduzaca un kilometraje" <<endl;
         cin >> kilometro;
         cout << "introduzca una marca" <<endl;
         cin >> marca;
+        autos.push_back(Auto(kilometro, marca));
 
     }
-    Auto auto1(1000, "fiat");
-    Auto auto2(1200, "reno");
-    Auto auto3(1300, "chebrolet");
-    Auto auto4(1400, "toyota");
-    Auto auto5(1500, "ford");
-
-    vector<Auto> Autos;
-
-
+    cout <<"cantidad de autos:"<< autos.size();
 }
