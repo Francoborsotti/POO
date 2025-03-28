@@ -31,19 +31,12 @@ int main(){
     vector<Auto>autos;
 
     while(true){
-        int kilometro;
-        string marca;
         SIZE_T memoryUsage = getCurrentMemoryUsage();
 
         if ((memoryUsage/ (1024 * 1024)) > 200){
             break;
         }
-
-        cout << "introduzaca un kilometraje" <<endl;
-        cin >> kilometro;
-        cout << "introduzca una marca" <<endl;
-        cin >> marca;
-        autos.push_back(Auto(kilometro, marca));
+        autos.push_back(Auto(1000, "fiat"));
 
     }
     cout <<"cantidad de autos:"<< autos.size();
