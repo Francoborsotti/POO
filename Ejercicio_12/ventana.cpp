@@ -6,9 +6,17 @@ Ventana::Ventana(QWidget *parent)
     , ui(new Ui::Ventana)
 {
     ui->setupUi(this);
+
+    connect(ui->pbSalir, SIGNAL(pressed()), this, SLOT(slot_salir()));
+
 }
 
 Ventana::~Ventana()
 {
     delete ui;
+}
+
+void Ventana::slot_salir()
+{
+    this->close();
 }
