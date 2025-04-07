@@ -21,6 +21,6 @@ private:
     Ui::Login *ui;
 
 private slots:
-    void slot_validarUsusario();
+    void slot_validarUsuario();
 };
 #endif // LOGIN_H

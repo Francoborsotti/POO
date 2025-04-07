@@ -19,8 +19,5 @@ public:
 
 private:
     Ui::Ventana *ui;
-
-private slots:
-    void slot_salir();
 };
 #endif // VENTANA_H
