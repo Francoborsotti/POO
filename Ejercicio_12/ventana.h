@@ -2,6 +2,8 @@
 #define VENTANA_H
 
 #include <QWidget>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,7 +19,13 @@ public:
     Ventana(QWidget *parent = nullptr);
     ~Ventana();
 
-private:
+private slots:
+    void resultado(QNetworkReply *reply);
+
+private:  
+    void peticionTemperature();
     Ui::Ventana *ui;
+
+    QNetworkAccessManager *manager;
 };
 #endif // VENTANA_H
