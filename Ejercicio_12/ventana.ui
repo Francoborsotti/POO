@@ -17,7 +17,7 @@
    <item row="0" column="2">
     <widget class="QLabel" name="lTemperatura">
      <property name="text">
-      <string>temperatura</string>
+      <string>Temperatura</string>
      </property>
     </widget>
    </item>

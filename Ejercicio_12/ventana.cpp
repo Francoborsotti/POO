@@ -37,7 +37,7 @@ void Ventana::resultado(QNetworkReply *reply)
         QJsonObject hourlyObj = jsonObj["hourly"].toObject();
         QJsonArray tempArray = hourlyObj["temperature_2m"].toArray();
         double temp = tempArray[0].toDouble();
-        ui->lTemperatura->setText("Temp: " + QString::number(temp) + " °C");
+        ui->lTemperatura->setText("Temperatura: " + QString::number(temp) + " °C");
     } else {
         ui->lTemperatura->setText("Error al obtener temp");
     }
