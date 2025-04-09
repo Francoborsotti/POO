@@ -18,7 +18,8 @@ HEADERS += \
     ventana.h
 
 FORMS += \
-    login.ui
+    login.ui \
+    ventana.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
