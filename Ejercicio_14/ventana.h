@@ -1,5 +1,5 @@
-#ifndef PINTURA_H
-#define PINTURA_H
+#ifndef VENTANA_H
+#define VENTANA_H
 
 #include <QWidget>
 #include <QVector>
@@ -12,11 +12,19 @@ struct Trazo
     QColor color;
 };
 
-class Pintura : public QWidget{
+QT_BEGIN_NAMESPACE
+namespace Ui {
+class Ventana;
+}
+QT_END_NAMESPACE
+
+class Ventana : public QWidget
+{
     Q_OBJECT
 
 public:
-    explicit Pintura(QWidget *parent = nullptr);
+    Ventana(QWidget *parent = nullptr);
+    ~Ventana();
 
 protected:
     void mousePressEvent(QMouseEvent *event) override;
@@ -27,11 +35,11 @@ protected:
     void wheelEvent(QWheelEvent *event) override;
 
 private:
+    Ui::Ventana *ui;
+
     QVector<Trazo> trazas;
     QVector <QPointF> trazaActual;
     QColor pincelColor;
     qreal pincelGrossor;
-
 };
-
-#endif // PINTURA_H
+#endif // VENTANA_H

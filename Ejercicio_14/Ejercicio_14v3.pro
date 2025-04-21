@@ -10,13 +10,13 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    pintura.cpp
+    ventana.cpp
 
 HEADERS += \
-    pintura.h
+    ventana.h
 
 FORMS += \
-    pintura.ui
+    ventana.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -1,15 +1,11 @@
-#include "pintura.h"
+#include "ventana.h"
 
 #include <QApplication>
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-
-    Pintura ventana;
-    ventana.resize(800, 600);
-    ventana.setWindowTitle("Dibujo");
-    ventana.show();
-
+    Ventana w;
+    w.show();
     return a.exec();
 }

@@ -1,17 +1,27 @@
-#include "pintura.h"
+#include "ventana.h"
+#include "ui_ventana.h"
 #include <QPainter>
 #include <QMouseEvent>
 #include <QKeyEvent>
 #include <QWheelEvent>
 
-Pintura::Pintura(QWidget *parent)
-    : QWidget(parent), pincelColor(Qt::black), pincelGrossor(3.0)
+Ventana::Ventana(QWidget *parent)
+    : QWidget(parent)
+    , ui(new Ui::Ventana)
+    , pincelColor(Qt::black)
+    , pincelGrossor(3.0)
 {
+    ui->setupUi(this);
     setAttribute(Qt::WA_StaticContents);
     setFocusPolicy(Qt::StrongFocus);
 }
 
-void Pintura::mousePressEvent(QMouseEvent *event)
+Ventana::~Ventana()
+{
+    delete ui;
+}
+
+void Ventana::mousePressEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton){
         trazaActual.clear();
@@ -20,7 +30,7 @@ void Pintura::mousePressEvent(QMouseEvent *event)
     }
 }
 
-void Pintura::mouseMoveEvent(QMouseEvent *event)
+void Ventana::mouseMoveEvent(QMouseEvent *event)
 {
     if(event->buttons() & Qt::LeftButton){
         trazaActual.append(event->position());
@@ -28,7 +38,7 @@ void Pintura::mouseMoveEvent(QMouseEvent *event)
     }
 }
 
-void Pintura::mouseReleaseEvent(QMouseEvent *event)
+void Ventana::mouseReleaseEvent(QMouseEvent *event)
 {
     if (event->button() == Qt::LeftButton && !trazaActual.isEmpty()) {
         Trazo nuevoTrazo;
@@ -40,7 +50,7 @@ void Pintura::mouseReleaseEvent(QMouseEvent *event)
     }
 }
 
-void Pintura::paintEvent(QPaintEvent *event)
+void Ventana::paintEvent(QPaintEvent *event)
 {
     Q_UNUSED(event);
     QPainter painter(this);
@@ -59,7 +69,7 @@ void Pintura::paintEvent(QPaintEvent *event)
     }
 }
 
-void Pintura::keyPressEvent(QKeyEvent *event)
+void Ventana::keyPressEvent(QKeyEvent *event)
 {
     switch (event->key()) {
     case Qt::Key_R:
@@ -81,7 +91,7 @@ void Pintura::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void Pintura::wheelEvent(QWheelEvent *event)
+void Ventana::wheelEvent(QWheelEvent *event)
 {
     if(event->angleDelta().y() > 0)
         pincelGrossor = qMin(pincelGrossor + 1.0, 50.0);
@@ -90,6 +100,3 @@ void Pintura::wheelEvent(QWheelEvent *event)
 
     event->accept();
 }
-
-
-
