@@ -14,8 +14,8 @@ Login::Login(QWidget *parent)
     connect(ui->leClave, SIGNAL(returnPressed()), this, SLOT(slot_validarUsuario()));
     connect(ui->pbIngresar, SIGNAL(pressed()), this, SLOT(slot_validarUsuario()));
 
-    adminDB = new AdminDB;
-    qDebug() << "La base se abrio correctamente" << adminDB->conectar("../test");
+    adminDB = new AdminDB(this);
+    adminDB->conectar("../test");
 }
 
 Login::~Login()
@@ -25,5 +25,15 @@ Login::~Login()
 
 void Login::slot_validarUsuario()
 {
-    adminDB->validarUsuario("usuarios", ui->leUsuario->text(), ui->leClave->text());
+
+
+    if (adminDB->validarUsuario("usuarios", ui->leUsuario->text(), ui->leClave->text())){
+        qDebug() << "funciona";
+    }else{
+        qDebug()<< "no fun";
+    }
+    //if(ui->leUsuario->text() == "admin" && ui->leClave->text() == "1234"){
+    //    ventana->show();
+    //    this->close();
+    //}
 }

@@ -11,12 +11,13 @@ AdminDB::AdminDB(QObject *parent)
     db = QSqlDatabase::addDatabase("QSQLITE");
 }
 
-bool AdminDB::conectar(QString archivoSqlite){
+bool AdminDB::conectar(QString archivoSqlite)
+{
     db.setDatabaseName(archivoSqlite);
 
-    if(db.open())
+    if(db.open()){
         return true;
-
+    }
     return false;
 }
 
@@ -26,34 +27,13 @@ QSqlDatabase AdminDB::getDB(){
 
 bool AdminDB::validarUsuario(QString tabla, QString usuario, QString clave)
 {
-    if (tabla.isEmpty()) {
-        qDebug() << "Error: El nombre de la tabla está vacío.";
-        return false;
-    }
+    if(db.open()){
+        QSqlQuery query = db.exec("SELECT nombre, apellido FROM usuarios WHERE nombre = 'Carlos' AND clave = '1234'");
 
-    if (db.open()) {
-        QSqlQuery query;
-
-        // Preparar la consulta con parámetros nombrados
-        QString consulta = "SELECT nombre, apellido FROM " + tabla +
-                           " WHERE Carlos AND Gomez";
-        query.prepare(consulta);
-
-        if (query.exec()) {
-            while (query.next()) {
-                qDebug() << "Nombre:" << query.value(0).toString()
-                << "Apellido:" << query.value(1).toString();
-            }
-        } else {
-            // Mostrar el error si la consulta falla
-            qDebug() << "Error en la consulta:" << query.lastError().text();
-            return false;
+        while(query.next()){
+            qDebug() << query.value(0).toString() << "" << query.value(1).toString();
+            return true;
         }
-    } else {
-        qDebug() << "Error al abrir la base de datos:" << db.lastError().text();
-        return false;
     }
-
-    return true;
+    return false;
 }
-
