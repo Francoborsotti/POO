@@ -28,9 +28,10 @@ QSqlDatabase AdminDB::getDB(){
 bool AdminDB::validarUsuario(QString tabla, QString usuario, QString clave)
 {
     if(db.open()){
-        QSqlQuery query = db.exec("SELECT nombre, apellido FROM usuarios WHERE nombre = 'Carlos' AND clave = '1234'");
+        QSqlQuery query = db.exec("SELECT nombre,apellido FROM " + tabla + " WHERE usuario = '" + usuario + "' AND clave = '" + clave + "'");
 
         while(query.next()){
+
             qDebug() << query.value(0).toString() << "" << query.value(1).toString();
             return true;
         }

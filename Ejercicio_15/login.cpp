@@ -28,12 +28,9 @@ void Login::slot_validarUsuario()
 
 
     if (adminDB->validarUsuario("usuarios", ui->leUsuario->text(), ui->leClave->text())){
-        qDebug() << "funciona";
+        this->close();
+        ventana->show();
     }else{
-        qDebug()<< "no fun";
+        ui->leClave->clear();
     }
-    //if(ui->leUsuario->text() == "admin" && ui->leClave->text() == "1234"){
-    //    ventana->show();
-    //    this->close();
-    //}
 }
