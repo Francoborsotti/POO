@@ -31,8 +31,8 @@ bool AdminDB::validarUsuario(QString tabla, QString usuario, QString clave)
         QSqlQuery query = db.exec("SELECT nombre,apellido FROM " + tabla + " WHERE usuario = '" + usuario + "' AND clave = '" + clave + "'");
 
         while(query.next()){
-
-            qDebug() << query.value(0).toString() << "" << query.value(1).toString();
+            db.exec("UPDATE" + tabla + " SET ultimo_ingreso = CURRENT_TIMESTAMP WHERE usuario = '" + usuario + "';");
+            //qDebug() << query.value(0).toString() << "" << query.value(1).toString();
             return true;
         }
     }
