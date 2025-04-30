@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "admindb.h"
+
 namespace Ui {
 class Ventana2;
 }
@@ -14,9 +16,13 @@ class Ventana2 : public QWidget
 public:
     explicit Ventana2(QWidget *parent = nullptr);
     ~Ventana2();
+    void setUsuarioActual(const QString &usuario);
 
 private:
     Ui::Ventana2 *ui;
+    AdminDB * adminDB;
+    void mostrarUltimosUsuarios();
+    QString usuarioActual;
 };
 
 #endif // VENTANA2_H

@@ -25,8 +25,6 @@ Login::~Login()
 
 void Login::slot_validarUsuario()
 {
-
-
     if (adminDB->validarUsuario("usuarios", ui->leUsuario->text(), ui->leClave->text())){
         this->close();
         ventana->show();

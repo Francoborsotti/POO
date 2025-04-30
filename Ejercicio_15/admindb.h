@@ -18,8 +18,12 @@ public:
 
     bool validarUsuario(QString tabla, QString usuario, QString clave);
 
+    void setUsuarioActual(const QString &usuario);
+    QString getUsuarioActual() const;
+
 private:
     QSqlDatabase db;
+    QString usuarioActual;
 
 signals:
 };
