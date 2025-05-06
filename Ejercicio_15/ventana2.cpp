@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include <QDialog>
 
 Ventana2::Ventana2(QWidget *parent)
     : QWidget(parent)
@@ -14,12 +15,18 @@ Ventana2::Ventana2(QWidget *parent)
     adminDB = new AdminDB(this);
     adminDB->conectar("../test");
 
-    mostrarUltimosUsuarios();
+
 }
 
 Ventana2::~Ventana2()
 {
     delete ui;
+}
+
+void Ventana2::setUsuarioActual(const QString &usuario)
+{
+    usuarioActual = usuario;
+    qDebug() << "Usuario actual seteado a:" << usuario;
 }
 
 void Ventana2::mostrarUltimosUsuarios()
@@ -33,31 +40,27 @@ void Ventana2::mostrarUltimosUsuarios()
 
     QSqlQuery query(db);
 
-    if (query.exec("SELECT nombre, apellido FROM usuarios ORDER BY ultimo_ingreso DESC LIMIT 2")) {
+    // Consulta para obtener el nombre y la última fecha de conexión del usuario actual
+    query.prepare("SELECT nombre, apellido, ultimo_ingreso FROM usuarios WHERE usuario = '" + usuarioActual + "'");
+
+     qDebug() << "Consulta preparada:" << query.lastQuery();
+    if (query.exec()) {
         qDebug() << "Consulta ejecutada correctamente.";
 
-        int contador = 0;
-
-        while (query.next()) {
+        if (query.next()) {
             QString nombre = query.value(0).toString();
             QString apellido = query.value(1).toString();
+            QString ultimoIngreso = query.value(2).toString();
 
-            if (contador == 0) {
-                ui->lUsuarioActual->setText("Usuario 1: " + nombre + " " + apellido);
-            } else if (contador == 1) {
-                ui->lUsuarioAnterior->setText("Usuario 2: " + nombre + " " + apellido);
-            }
+            // Mostrar el nombre completo del usuario
+            ui->lUsuarioActual->setText("Usuario: " + nombre + " " + apellido);
 
-            contador++;
+            // Mostrar la última fecha de conexión
+            ui->lUsuarioAnterior->setText("Última conexión: " + ultimoIngreso);
+        } else {
+            ui->lUsuarioActual->setText("Usuario: No disponible");
+            ui->lUsuarioAnterior->setText("Última conexión: No disponible");
         }
-
-        if (contador < 1) {
-            ui->lUsuarioActual->setText("Usuario 1: No disponible");
-        }
-        if (contador < 2) {
-            ui->lUsuarioAnterior->setText("Usuario 2: No disponible");
-        }
-
     } else {
         qDebug() << "Error en la consulta:" << query.lastError().text();
     }

@@ -17,11 +17,11 @@ public:
     explicit Ventana2(QWidget *parent = nullptr);
     ~Ventana2();
     void setUsuarioActual(const QString &usuario);
+    void mostrarUltimosUsuarios();
 
 private:
     Ui::Ventana2 *ui;
     AdminDB * adminDB;
-    void mostrarUltimosUsuarios();
     QString usuarioActual;
 };
 

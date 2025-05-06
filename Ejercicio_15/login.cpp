@@ -9,8 +9,6 @@ Login::Login(QWidget *parent)
 {
     ui->setupUi(this);
 
-    ventana = new Ventana2;
-
     connect(ui->leClave, SIGNAL(returnPressed()), this, SLOT(slot_validarUsuario()));
     connect(ui->pbIngresar, SIGNAL(pressed()), this, SLOT(slot_validarUsuario()));
 
@@ -27,6 +25,9 @@ void Login::slot_validarUsuario()
 {
     if (adminDB->validarUsuario("usuarios", ui->leUsuario->text(), ui->leClave->text())){
         this->close();
+        ventana = new Ventana2;
+        ventana->setUsuarioActual(ui->leUsuario->text());
+        ventana->mostrarUltimosUsuarios();
         ventana->show();
     }else{
         ui->leClave->clear();
