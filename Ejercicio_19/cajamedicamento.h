@@ -1,28 +1,30 @@
 #ifndef CAJAMEDICAMENTO_H
 #define CAJAMEDICAMENTO_H
 
-#include <QWidget>
+#include <QString>
+#include <QtGlobal> // Para qAbs, necesario para la comparación de floats
 
-class CajaMedicamento : public QWidget
+class CajaMedicamento
 {
-    Q_OBJECT
 public:
-    CajaMedicamento(float dosis);
+    // Constructor para crear una nueva caja (sin ID, se asignará por la BD)
+    explicit CajaMedicamento(float dosis);
+
+    // Constructor para cargar una caja desde la base de datos
     CajaMedicamento(int id, float dosis);
-
-    CajaMedicamento operator+(const CajaMedicamento &otra) const;
-    bool operator==(const CajaMedicamento &otra) const;
-
-    QString toString() const;
 
     int getId() const;
     float getDosisTotales() const;
 
-private:
-    int id;
-    float dosisTotales;
+    // Operadores
+    CajaMedicamento operator+(const CajaMedicamento &otra) const;
+    bool operator==(const CajaMedicamento &otra) const; // Compara dosis
 
-signals:
+    QString toString() const;
+
+private:
+    int id; // 0 si es una caja nueva no persistida
+    float dosisTotales;
 };
 
 #endif // CAJAMEDICAMENTO_H

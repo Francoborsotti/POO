@@ -1,15 +1,14 @@
-#include "widget.h"
-#include "admindbmedicamentos.h"
-
 #include <QApplication>
+#include <QLocale>
+#include "gestionmedicamentoswidget.h"
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+    QLocale::setDefault(QLocale::C);
 
-    AdminDB::getInstancia()->conectar();
+    GestionMedicamentosWidget ventanaPrincipal;
+    ventanaPrincipal.show();
 
-    Widget w;
-    w.show();
     return a.exec();
 }

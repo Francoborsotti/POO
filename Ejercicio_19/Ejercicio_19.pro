@@ -1,4 +1,4 @@
-QT       += core gui sql
+QT       += core gui widgets sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -9,18 +9,18 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    admindbmedicamentos.cpp \
+    admindb.cpp \
     cajamedicamento.cpp \
     main.cpp \
-    widget.cpp
+    gestionmedicamentoswidget.cpp
 
 HEADERS += \
-    admindbmedicamentos.h \
+    admindb.h \
     cajamedicamento.h \
-    widget.h
+    gestionmedicamentoswidget.h
 
 FORMS += \
-    widget.ui
+    gestionmedicamentoswidget.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
