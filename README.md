@@ -20,3 +20,8 @@ dentro de la carpeta correspondiente. Algunos ejercicios incluyen interfaces gr�
 Las carpetas son independientes entre sí y se numeran del **Ejercicio_1** al **Ejercicio_24** (sin incluir el 8), por lo que pueden probarse de forma individual.
 
 Esperamos que este conjunto de ejemplos sea de utilidad para reforzar conceptos de programación orientada a objetos y servir como punto de partida para futuros proyectos.
+
+## Videos ejercicios 9, 10 y 11:
+https://youtu.be/hntGo48o9BQ
+https://youtu.be/WZfcSQbbr1I
+https://youtu.be/VMHlzXIaVug
